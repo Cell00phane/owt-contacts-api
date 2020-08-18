@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 /**
  * A Contact entity. Each contact has a auto-generated id in the database.
@@ -31,11 +30,4 @@ public class Contact {
     private String address;
     private String email;
     private String phoneNumber;
-
-    @ManyToMany
-    @JoinTable(
-            name = "skilled_contact",
-            joinColumns = @JoinColumn(name = "contact_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill"))
-    Set<Skill> skills;
 }

@@ -13,4 +13,7 @@ Authentications/{userid}:
 Notes:
 - How JPA Many to many relationship works in the SQL database: Each entity has a hashset in POJO of the other. [VERY BAD SOLUTION: Bidirectional relationships are very hard to maintain in Java].
 
+JPARepository extends CRUD and PagingAndSortingRepository.
+
 - Users should have its own API server, with only the authentication endpoint.
+

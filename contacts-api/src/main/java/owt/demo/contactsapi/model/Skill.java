@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.Set;
 
 /**
  * A skill is identified by its name.
@@ -18,8 +16,4 @@ import java.util.Set;
 public class Skill {
     @Id
     private String skill;
-    private String level;
-
-    @ManyToMany(mappedBy = "skills")
-    Set<Contact> skilledPeople;
 }
