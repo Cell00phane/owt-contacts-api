@@ -45,6 +45,11 @@ public class SkillsController implements SkillApi {
     }
 
     @Override
+    public ResponseEntity<Skill> findSkillById(String skillId) throws Exception {
+        return ResponseEntity.ok(skillsService.getSkillById(skillId));
+    }
+
+    @Override
     public ResponseEntity<Object> addSkill(Skill body) throws Exception {
         return ResponseEntity.created(skillsService.saveSkill(body)).build();
     }

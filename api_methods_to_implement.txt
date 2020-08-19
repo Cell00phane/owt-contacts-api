@@ -49,5 +49,6 @@ JPARepository extends CRUD and PagingAndSortingRepository.
 ToTryout:
 - Different JPA configurations for many to many
 - RestController instead of Controller (play with return type ResponseEntity vs just the Java POJO)
-- @Override need to copy annotations?
+- @Override need to copy annotations? No
+- @Valid marks a component or a method for javax validation. 
 

@@ -1,6 +1,8 @@
 package owt.demo.contacts.api.endpoints;
 
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import java.util.List;
 @Controller
 @Api(value = "Contact", description = "the Contact API")
 public class ContactsController implements ContactApi {
+
+    Logger logger = LoggerFactory.getLogger(ContactsController.class);
 
     @Autowired
     ContactsService contactsService;
@@ -39,6 +43,13 @@ public class ContactsController implements ContactApi {
             }
         });
         return ResponseEntity.ok(contactsService.getContacts());
+    }
+
+    @Override
+    public ResponseEntity<Contact> getContactById(Long contactId) throws Exception {
+        Contact contact = contactsService.getContactById(contactId);
+        logger.info("Contact found {}", contact);
+        return ResponseEntity.ok(contact);
     }
 
     @Override

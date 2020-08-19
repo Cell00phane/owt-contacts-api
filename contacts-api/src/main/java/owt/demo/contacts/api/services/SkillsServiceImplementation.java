@@ -3,6 +3,7 @@ package owt.demo.contacts.api.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import owt.demo.contacts.api.exceptions.NotFoundException;
 import owt.demo.contacts.api.utils.DTOConverter;
 import owt.demo.contacts.model.Skill;
 import owt.demo.contacts.model.SkillEntity;
@@ -27,6 +28,14 @@ public class SkillsServiceImplementation implements SkillsService {
             skills.add(DTOConverter.SkillEntityToDTO(skillEntity));
         }
         return skills;
+    }
+
+    @Override
+    public Skill getSkillById(String id) throws NotFoundException {
+        SkillEntity skillEntity = skillRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("No skill found with the name " + id));
+
+        return DTOConverter.SkillEntityToDTO(skillEntity);
     }
 
     @Override
