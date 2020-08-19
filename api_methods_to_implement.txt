@@ -17,3 +17,37 @@ JPARepository extends CRUD and PagingAndSortingRepository.
 
 - Users should have its own API server, with only the authentication endpoint.
 
+<plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>4.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${basedir}/src/main/resources/api-spec.yaml</inputSpec>
+                            <language>spring</language>
+                            <configOptions>
+                                <dateLibrary>joda</dateLibrary>
+                                <useBeanValidation>true</useBeanValidation>
+                                <interfaceOnly>true</interfaceOnly>
+                                <delegatePattern>false</delegatePattern>
+                                <apiPackage>owt.demo.contacts.api</apiPackage>
+                                <configPackage>owt.demo.contacts.api.config</configPackage>
+                                <basePackage>owt.demo.contacts</basePackage>
+                                <modelPackage>owt.demo.contacts.model</modelPackage>
+                                <useTags>true</useTags>
+                                <unhandledException>true</unhandledException>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+ToTryout:
+- Different JPA configurations for many to many
+- RestController instead of Controller (play with return type ResponseEntity vs just the Java POJO)
+- @Override need to copy annotations?
+

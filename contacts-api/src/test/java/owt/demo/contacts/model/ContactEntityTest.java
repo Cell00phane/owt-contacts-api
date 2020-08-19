@@ -1,16 +1,16 @@
-package owt.demo.contactsapi.model;
+package owt.demo.contacts.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ContactTest {
-    private Contact contact;
+class ContactEntityTest {
+    private ContactEntity contactEntity;
 
     @BeforeEach
     void setupTestUser() {
-        contact = new Contact().toBuilder()
+        contactEntity = new ContactEntity().toBuilder()
                 .firstName("John")
                 .lastName("Doe")
                 .fullName("John D. Doe")
@@ -22,21 +22,21 @@ class ContactTest {
 
     @Test
     void getFirstname() {
-        assertEquals("John", contact.getFirstName());
+        assertEquals("John", contactEntity.getFirstName());
     }
 
     @Test
     void getLastname() {
-        assertEquals("Doe", contact.getLastName());
+        assertEquals("Doe", contactEntity.getLastName());
     }
 
     @Test
     void getFullname() {
-        assertEquals("John D. Doe", contact.getFullName());
+        assertEquals("John D. Doe", contactEntity.getFullName());
     }
 
     @Test
     void getEmail() {
-        assertEquals("John@Doe.com", contact.getEmail());
+        assertEquals("John@Doe.com", contactEntity.getEmail());
     }
 }

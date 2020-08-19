@@ -1,4 +1,4 @@
-package owt.demo.contactsapi;
+package owt.demo.contacts;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,21 +1,22 @@
-package owt.demo.contactsapi.model;
+package owt.demo.contacts.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 
 /**
- * A User entity. Each user has a auto-generated id in the database.
+ * A UserEntity entity. Each user has a auto-generated id in the database.
  */
 @Entity
+@Table(name = "user")
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String username;
 }

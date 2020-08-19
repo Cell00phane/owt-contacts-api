@@ -1,4 +1,4 @@
-package owt.demo.contactsapi;
+package owt.demo.contacts;
 
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.fasterxml.jackson.databind.util.ISO8601Utils;

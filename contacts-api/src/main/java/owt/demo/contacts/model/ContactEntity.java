@@ -1,4 +1,4 @@
-package owt.demo.contactsapi.model;
+package owt.demo.contacts.model;
 
 import lombok.*;
 
@@ -6,19 +6,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * A Contact entity. Each contact has a auto-generated id in the database.
+ * A ContactEntity entity. Each contactEntity has a auto-generated id in the database.
  */
 @Entity
+@Table(name = "contact")
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Contact {
+public class ContactEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long contactId;
 
-    // The user id that owns this contact
+    // The user id that owns this contactEntity
     private Long ownerId;
 
     @NotNull

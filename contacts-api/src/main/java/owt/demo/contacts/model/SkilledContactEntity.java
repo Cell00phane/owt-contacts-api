@@ -1,15 +1,16 @@
-package owt.demo.contactsapi.model;
+package owt.demo.contacts.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Table(name = "skilled_contact")
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class SkilledContact {
+public class SkilledContactEntity {
 
     @EmbeddedId
     SkilledContactKey id;
@@ -17,12 +18,12 @@ public class SkilledContact {
     @ManyToOne
     @MapsId("contact_id")
     @JoinColumn(name = "contact_id")
-    Contact contact;
+    ContactEntity contactEntity;
 
     @ManyToOne
-    @MapsId("skill")
-    @JoinColumn(name = "skill")
-    Skill skill;
+    @MapsId("skillEntity")
+    @JoinColumn(name = "skillEntity")
+    SkillEntity skillEntity;
 
     String level;
 }

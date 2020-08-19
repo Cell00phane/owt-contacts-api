@@ -1,4 +1,4 @@
-package owt.demo.contactsapi.model;
+package owt.demo.contacts.model;
 
 import lombok.Data;
 
@@ -12,6 +12,6 @@ public class SkilledContactKey implements Serializable {
     @Column(name = "contact_id")
     Long contactId;
 
-    @Column(name = "skill")
+    @Column(name = "skillEntity")
     String skillId;
 }
