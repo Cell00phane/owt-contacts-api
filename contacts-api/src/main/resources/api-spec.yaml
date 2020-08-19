@@ -38,6 +38,30 @@ paths:
             items:
               $ref: "#/definitions/Contact"
 
+    post:
+      tags:
+        - contact
+      summary: Add a new contact
+      description: Add a new contact for a user
+      operationId: addContact
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: New contact
+          required: true
+          schema:
+            $ref: "#/definitions/Contact"
+      responses:
+        "201":
+          description: Contact added
+          schema:
+            description: Resource URI
+            type: object
+        "400":
+          description: Invalid contact
+
   /skills:
     get:
       tags:
@@ -54,6 +78,30 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Skill"
+
+    post:
+      tags:
+        - skill
+      summary: Add a new skill
+      description: Add a new skill
+      operationId: addSkill
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: New skill
+          schema:
+            $ref: "#/definitions/Skill"
+      responses:
+        201:
+          description: Skill added
+          schema:
+            description: Resource URI
+            type: object
+        400:
+          description: Invalid Skill
+
 definitions:
   Contact:
     type: "object"

@@ -2,11 +2,13 @@ package owt.demo.contacts.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import owt.demo.contacts.api.utils.DTOConverter;
 import owt.demo.contacts.model.Skill;
 import owt.demo.contacts.model.SkillEntity;
 import owt.demo.contacts.repository.SkillRepository;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +27,15 @@ public class SkillsServiceImplementation implements SkillsService {
             skills.add(DTOConverter.SkillEntityToDTO(skillEntity));
         }
         return skills;
+    }
+
+    @Override
+    public URI saveSkill(Skill skill) {
+        SkillEntity skillEntity = DTOConverter.SkillDTOToEntity(skill);
+        skillRepository.save(skillEntity);
+
+        return ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(skillEntity.getSkill()).toUri();
     }
 }
