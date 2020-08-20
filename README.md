@@ -25,3 +25,4 @@ the request is passed down the normal pipeline.
 In the controllers, any unauthorized access, is verified using that attribute that we set, that checks if the user id
 matches the owner id of the resource he's trying to access.
 - Better exception handling with clearer messages and response codes.
+- More tests and load handling.
