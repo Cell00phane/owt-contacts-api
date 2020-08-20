@@ -18,7 +18,7 @@ import owt.demo.contacts.model.Skill;
 import java.util.List;
 
 @Controller
-@Api(value = "Skill", description = "the Skill API")
+@Api(value = "Skill", description = "the Skill API", tags={ "skill"})
 public class SkillsController implements SkillApi {
 
     @Autowired

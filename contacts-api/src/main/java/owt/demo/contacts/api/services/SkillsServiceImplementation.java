@@ -25,7 +25,7 @@ public class SkillsServiceImplementation implements SkillsService {
         List<Skill> skills = new ArrayList<>();
 
         for (SkillEntity skillEntity: skillRepository.findAll()) {
-            skills.add(DTOConverter.SkillEntityToDTO(skillEntity));
+            skills.add(DTOConverter.skillEntityToDTO(skillEntity));
         }
         return skills;
     }
@@ -35,12 +35,12 @@ public class SkillsServiceImplementation implements SkillsService {
         SkillEntity skillEntity = skillRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("No skill found with the name " + id));
 
-        return DTOConverter.SkillEntityToDTO(skillEntity);
+        return DTOConverter.skillEntityToDTO(skillEntity);
     }
 
     @Override
     public URI saveSkill(Skill skill) {
-        SkillEntity skillEntity = DTOConverter.SkillDTOToEntity(skill);
+        SkillEntity skillEntity = DTOConverter.skillDTOToEntity(skill);
         skillRepository.save(skillEntity);
 
         return ServletUriComponentsBuilder

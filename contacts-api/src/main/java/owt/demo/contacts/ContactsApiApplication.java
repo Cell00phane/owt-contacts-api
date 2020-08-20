@@ -9,16 +9,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import owt.demo.contacts.model.ContactEntity;
-import owt.demo.contacts.model.SkillEntity;
-import owt.demo.contacts.model.SkilledContactEntity;
-import owt.demo.contacts.model.SkilledContactKey;
+import owt.demo.contacts.model.*;
 import owt.demo.contacts.repository.ContactRepository;
 import owt.demo.contacts.repository.SkillRepository;
 import owt.demo.contacts.repository.SkilledContactRepository;
+import owt.demo.contacts.repository.UserRepository;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"owt.demo.contacts", "owt.demo.contacts.api"})
@@ -31,6 +31,8 @@ public class ContactsApiApplication implements CommandLineRunner {
     SkillRepository skillRepository;
     @Autowired
     SkilledContactRepository skilledContactRepository;
+    @Autowired
+    UserRepository userRepository;
 
     Logger logger = LoggerFactory.getLogger(ContactsApiApplication.class);
 
@@ -48,29 +50,68 @@ public class ContactsApiApplication implements CommandLineRunner {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            ContactEntity contactEntity = ContactEntity.builder()
+            UserEntity admin = UserEntity.builder()
+                    .id(0L)
+                    .username("admin")
+                    .password("password").build();
+            UserEntity userEntity1 = UserEntity.builder()
+                    .username("user1")
+                    .password("password1")
+                    .id(1L).build();
+
+            userRepository.save(admin);
+            userRepository.save(userEntity1);
+
+            ContactEntity john = ContactEntity.builder()
                     .firstName("John")
                     .lastName("Doe")
                     .contactId(1L).build();
 
-            ContactEntity contactEntity2 = ContactEntity.builder()
+            ContactEntity morris = ContactEntity.builder()
                     .firstName("Moris")
                     .lastName("Johnson")
-                    .contactId(1L).build();
+                    .contactId(2L).build();
 
-            SkillEntity skillEntity = new SkillEntity("Programming");
+            SkillEntity programmingSkill = new SkillEntity("Programming");
+            SkillEntity knittingSkill = new SkillEntity("Knitting");
 
-            contactRepository.save(contactEntity);
-            skillRepository.save(skillEntity);
+            contactRepository.save(john);
+            contactRepository.save(morris);
+            skillRepository.save(programmingSkill);
+            skillRepository.save(knittingSkill);
 
-            /*SkilledContactKey skilledContactKey = new SkilledContactKey();
+            // Very tedious to create a skilledContact.
+            SkilledContactKey skilledContactKey = new SkilledContactKey();
             skilledContactKey.setContactId(1L);
             skilledContactKey.setSkillId("Programming");
             SkilledContactEntity skilledContactEntity = new SkilledContactEntity(skilledContactKey,
-                    contactEntity, skillEntity, "Advanced");
+                    john, programmingSkill, "Advanced");
             skilledContactRepository.save(skilledContactEntity);
 
-            List<SkilledContactEntity> skilledContactEntities = skilledContactRepository.findAll();
+            SkilledContactKey skilledContactKey2 = new SkilledContactKey();
+            skilledContactKey2.setContactId(1L);
+            skilledContactKey2.setSkillId("Knitting");
+            SkilledContactEntity skilledContactEntity2 = new SkilledContactEntity(skilledContactKey2,
+                    john, knittingSkill, "Basic");
+            skilledContactRepository.save(skilledContactEntity2);
+
+            SkilledContactKey skilledContactKey3 = new SkilledContactKey();
+            skilledContactKey3.setContactId(2L);
+            skilledContactKey3.setSkillId("Knitting");
+            SkilledContactEntity skilledContactEntity3 = new SkilledContactEntity(skilledContactKey3,
+                    morris, knittingSkill, "Expert");
+            skilledContactRepository.save(skilledContactEntity3);
+
+            List<SkilledContactEntity> skilledContactEntities = skilledContactRepository
+                    .findSkilledContactEntitiesByContactEntity_ContactId(1L);
+            /*List<SkillEntity> skills = new ArrayList<>();
+            for (SkilledContactEntity s: skilledContactEntities) {
+                skills.add(s.getSkillEntity());
+            }*/
+            logger.info("Skills found {} for contact 1", skilledContactEntities.stream()
+                    .map(SkilledContactEntity::getSkillEntity).collect(Collectors.toList()));
+
+            /*List<SkilledContactEntity> skilledContactEntities = skilledContactRepository.findAll();
             SkilledContactEntity skilledContactEntity1 = skilledContactRepository.findById(skilledContactKey).orElse(null);
             logger.info("SkilledContacts found {}", skilledContactEntity1);*/
 

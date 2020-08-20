@@ -13,11 +13,13 @@ import owt.demo.contacts.api.ApiUtil;
 import owt.demo.contacts.api.ContactApi;
 import owt.demo.contacts.api.services.ContactsService;
 import owt.demo.contacts.model.Contact;
+import owt.demo.contacts.model.SkillLevel;
+import owt.demo.contacts.model.SkilledContact;
 
 import java.util.List;
 
 @Controller
-@Api(value = "Contact", description = "the Contact API")
+@Api(value = "Contact", description = "the Contact API", tags={ "contact"})
 public class ContactsController implements ContactApi {
 
     Logger logger = LoggerFactory.getLogger(ContactsController.class);
@@ -55,5 +57,15 @@ public class ContactsController implements ContactApi {
     @Override
     public ResponseEntity<Object> addContact(Contact body) throws Exception {
         return ResponseEntity.created(contactsService.saveContact(body)).build();
+    }
+
+    @Override
+    public ResponseEntity<List<SkillLevel>> getSkillsByContactId(Long contactId) throws Exception {
+        return ResponseEntity.ok(contactsService.getSkillsById(contactId));
+    }
+
+    @Override
+    public ResponseEntity<SkilledContact> addSkillToContact(Long contactId, SkillLevel skill) throws Exception {
+        return ResponseEntity.ok(contactsService.addSkillToContact(contactId, skill));
     }
 }

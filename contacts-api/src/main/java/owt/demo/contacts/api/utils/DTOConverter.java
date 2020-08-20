@@ -1,12 +1,9 @@
 package owt.demo.contacts.api.utils;
 
-import owt.demo.contacts.model.Contact;
-import owt.demo.contacts.model.ContactEntity;
-import owt.demo.contacts.model.Skill;
-import owt.demo.contacts.model.SkillEntity;
+import owt.demo.contacts.model.*;
 
 public class DTOConverter {
-    public static Contact ContactEntityToDTO(ContactEntity entity) {
+    public static Contact contactEntityToDTO(ContactEntity entity) {
         return new Contact()
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
@@ -16,7 +13,7 @@ public class DTOConverter {
                 .phoneNumber(entity.getPhoneNumber());
     }
 
-    public static ContactEntity ContactDTOToEntity(Contact contact) {
+    public static ContactEntity contactDTOToEntity(Contact contact) {
         return ContactEntity.builder()
                 .firstName(contact.getFirstName())
                 .lastName(contact.getLastName())
@@ -27,12 +24,26 @@ public class DTOConverter {
                 .build();
     }
 
-    public static Skill SkillEntityToDTO(SkillEntity entity) {
+    public static Skill skillEntityToDTO(SkillEntity entity) {
         return new Skill()
                 .skill(entity.getSkill());
     }
 
-    public static SkillEntity SkillDTOToEntity(Skill skill) {
+    public static SkillEntity skillDTOToEntity(Skill skill) {
         return new SkillEntity(skill.getSkill());
     }
+
+    public static User userEntityToDTO(UserEntity userEntity) {
+        return new User().id(userEntity.getId())
+                .password(userEntity.getPassword())
+                .username(userEntity.getUsername());
+    }
+
+    public static UserEntity userDTOToEntity(User user) {
+        return UserEntity.builder().id(user.getId())
+                .password(user.getPassword())
+                .username(user.getUsername()).build();
+    }
+
+    // TODO: SkilledContact DTO to contain only references to Contact and Skill and level in spec
 }
